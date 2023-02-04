@@ -1,0 +1,172 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 16, 2016, 10:47:38 PM
+    Author     : redon13
+*/
+
+.my-box{
+    /*text-align: left;
+    margin-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;*/
+    display: inline-block;
+    vertical-align: top;
+    width: 49%;
+    margin: 0 auto;
+    padding: 15px;
+    border-style: solid;
+    border-color: lightskyblue;
+    
+}
+
+.my-box2{
+    float:left;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.card-well{
+    background: lightskyblue;
+}
+
+.card-data{
+    color: black;
+    font-weight: 500;
+    line-height: 12px;
+}
+
+.card-label{
+    color: gray;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.priority-dot{
+   margin-left: 0px; 
+   width: 40px;
+   height: 40px;
+}
+
+.priority-dot-list{
+   margin-left: 5px;
+}
+
+.card-note{
+    color: black;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.change-staus-icons{
+     margin-left: 5px;
+     color: white;
+}
+
+#btnInProgress{
+    background: yellow;
+    
+}
+
+#btnOnHold{
+    background: red;
+}
+
+#btnCompleted{
+    background: green;
+}
+
+.mybutton{
+    float: right;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.option-select-button{
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.well {
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Login - Register page*/
+.login-page, .register-page{
+    background: #0075b0;
+}
+
+.login-box-body, .register-box-body{
+    border-radius: 10px;
+    padding: 50px;
+}
+.login-logo a, .register-logo a{
+    padding-top: 0px;
+    color: white;
+}
+.login-logo p, .register-logo p{
+    font-size: 16px;
+}
+.logo-img{
+    width: 50%;
+    margin: 0 auto;
+    background: transparent;
+}
+
+.my-well{
+    background: whitesmoke;
+}
+
+.details{
+    padding-top: 20px;
+}
+
+.notes{
+    padding: 15px;
+    border-style: solid;
+    border-color: lightskyblue;
+}
+
+.add-note-btn{
+    width: 30px;
+    height: 30px;
+    background: lightskyblue;
+}
+
+.icon-image{
+    width: 20px;
+    height: 20px;
+}
+
+.icon-image-note{
+    width: 30px;
+    height: 30px;
+}
+
+
+/* Media query */
+/* Medium Devices, Desktops */
+    @media only screen and (max-width : 806px) {
+        
+        .option-butons-div{
+            display: none;
+        }
+        
+        .card-data{
+            color: black;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 10px;
+        }
+        
+        p {
+            margin: 0 0 8px;
+        }
+
+}
+

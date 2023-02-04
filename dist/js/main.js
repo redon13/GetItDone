@@ -413,7 +413,7 @@ function detailedJobcard(jobCards){
     html +='</div>';
     
     html += '<div class="well my-box">';
-      html += '<p class="card-label">Change priority : </p><img class="priority-dot" onclick="changePriorityTo1()" src="img/priority1.png"/><img class="priority-dot" onclick="changePriorityTo2()"  src="img/priority2.png"/><img class="priority-dot" onclick="changePriorityTo3()"  src="img/priority3.png"/>';
+      html += '<p class="card-label">Change priority : </p><img class="priority-dot" onclick="changePriorityTo1()" src="../../img/priority1.png"/><img class="priority-dot" onclick="changePriorityTo2()"  src="../../img/priority2.png"/><img class="priority-dot" onclick="changePriorityTo3()"  src="../../img/priority3.png"/>';
     html +='</div>';
     
         // notes
@@ -422,7 +422,7 @@ function detailedJobcard(jobCards){
             html += '<p id="note" class="card-note">' + jobCards.note + '</p>';
             
              html += '<div class="add-note-btn">';
-            html += '<a role="button" data-toggle="modal" data-target="#noteModal" onclick="addNote()"><img class="icon-image-note" src="img/add.png" /></a>';
+            html += '<a role="button" data-toggle="modal" data-target="#noteModal" onclick="addNote()"><img class="icon-image-note" src="../../img/add.png" /></a>';
             html += '</div>';
             
         html += '</div>';
@@ -471,8 +471,8 @@ function detailedJobcard(jobCards){
     html += '</div>';
     
     html += '<div class="">';
-    html += '<a class="btn btn-warning mybutton" onclick="reloadAllJobs()"><img class="icon-image" src="img/cancel.png" alt="Cancel"/></a>';
-    html += '<a class="btn btn-info mybutton" onclick="refreshCard("' + jobCards.status + '")"><img class="icon-image" src="img/done.png" alt="Add"/></a>';
+    html += '<a class="btn btn-warning mybutton" onclick="reloadAllJobs()"><img class="icon-image" src="../../img/cancel.png" alt="Cancel"/></a>';
+    html += '<a class="btn btn-info mybutton" onclick="refreshCard("' + jobCards.status + '")"><img class="icon-image" src="../../img/done.png" alt="Add"/></a>';
     html += '</div>';
   
   

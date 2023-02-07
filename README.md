@@ -3,4 +3,4 @@
 Introduction
 ============
 
-**GetItDone** -- is a simply task manager for maintenance
+**GetItDone** -- is a simply task manager for maintenance teams

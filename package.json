@@ -4,7 +4,8 @@
   "description": "task manager",
   "main": "bundle.js",
   "scripts": {
-    "test": "Standard"
+    "test": "Standard",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

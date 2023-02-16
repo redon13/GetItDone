@@ -33,10 +33,6 @@ function checkPasswordStrength() {
     const password = signUpForm.password.value
     let pass = document.getElementById("password").value;
     let passwconf = document.getElementById("passwordconf").value;
-
-    // todo delete it
-    console.log(pass + ' ' + passwconf)
-
     let strength = 0;
 
     if (pass == passwconf){
@@ -78,12 +74,14 @@ function checkPasswordStrength() {
             console.log(err.message + err.code)
         })
     } else {
-        console.log('Password does not match!')
-        signUpForm.reset()
+        console.log("Password does not match")
+        signUpForm.reset();
+
         return;
     }
 
 }
+
 
 //  end.            ***********************
 

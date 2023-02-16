@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+//  handle lorin and sign up forms  ***********************************
 (function ($) {
     "use strict";
 
@@ -65,7 +72,7 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
 
 })(jQuery);
+
+//  handle login and sign up forms end ************************************

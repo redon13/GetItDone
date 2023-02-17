@@ -2,7 +2,7 @@
 
 // Firebase import    *******************
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+//import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // end. **************************
 
@@ -27,65 +27,6 @@ const auth = getAuth(app);
 // end. *****************************************
 
 
-//  password check  ***********************
-function checkPasswordStrength() {
-    const email = signUpForm.email.value
-    const password = signUpForm.password.value
-    let pass = document.getElementById("password").value;
-    let passwconf = document.getElementById("passwordconf").value;
-    let strength = 0;
-
-    if (pass == passwconf){
-        if (pass.length < 6) {
-            //document.getElementById("passwordStrength").innerHTML = "Too short";
-            console.log('Password too short')
-            return;
-        }
-
-        // todo future feature - checking password strength
-        if (pass.length > 7) strength += 1;
-        if (pass.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1;
-        if (pass.match(/([a-zA-Z])/) && pass.match(/([0-9])/))  strength += 1;
-        if (pass.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1;
-        if (pass.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
-
-        if (strength < 2) {
-            //document.getElementById("passwordStrength").innerHTML = "Weak";
-            console.log('Password weak!')
-        } else if (strength == 2) {
-            //document.getElementById("passwordStrength").innerHTML = "Medium";
-            console.log('Password medium strength!')
-        } else {
-            //document.getElementById("passwordStrength").innerHTML = "Strong";
-            console.log('Password strong!')
-        }
-
-        // create user
-        createUserWithEmailAndPassword(auth, email, password).then((cred) => {
-            signUpForm.reset()
-        }).then((userCredential) => {
-            // Signed in
-            // todo get it work
-            //const user = userCredential.user;
-            // todo delete
-            //console.log(user)
-            // ...
-        }).catch((err) => {
-            console.log(err.message + err.code)
-        })
-    } else {
-        console.log("Password does not match")
-        signUpForm.reset();
-
-        return;
-    }
-
-}
-
-
-//  end.            ***********************
-
-
 // signing user up  ***********************
 const signUpForm = document.querySelector('.signup')
 signUpForm.addEventListener('submit', (e) => {
@@ -96,6 +37,153 @@ signUpForm.addEventListener('submit', (e) => {
 
 })
 //  end.    *******************************
+
+function modalClose(){
+
+    // modal clos X button
+    const closeModalXBtn = document.getElementById("closeModalXBtn")
+    const passwordCheckModal = document.getElementById('passwordCheckModal')
+    closeModalXBtn.addEventListener("click", function() {
+        passwordCheckModal.classList.add("hide");
+        passwordCheckModal.style.display = "none";
+    });
+
+    // modal close button
+    const closeModal = document.getElementById("closeModalBtn")
+    closeModal.addEventListener("click", function() {
+        passwordCheckModal.classList.add("hide");
+        passwordCheckModal.style.display = "none";
+    });
+}
+
+function passwordCheckModal(){
+    // toggle modal warning if password does not match
+    const passwordCheckModal = document.getElementById('passwordCheckModal')
+    passwordCheckModal.classList.add("show");
+    passwordCheckModal.style.display = "block";
+}
+
+//  password check  ***********************
+function checkPasswordStrength() {
+    const email = signUpForm.email.value
+    const password = signUpForm.password.value
+    const passwconf = signUpForm.passwordconf.value
+    const modalMessage = document.getElementById('modalMessage')
+    const modalHeadre = document.getElementById('modalHeader')
+
+
+    let strength = 0;
+
+    if (password === passwconf){
+        if (password.length < 6) {
+            // Call modal
+            passwordCheckModal()
+
+            // Change the text content
+            modalHeadre.textContent = "Ooops!"
+            modalMessage.textContent = "Password too short! At least 6 character required!"
+
+            //  Clear password fields
+            signUpForm.password.value = ""
+            signUpForm.passwordconf.value = ""
+
+            // close modal
+            modalClose()
+            return;
+        }
+
+        // todo future feature - checking password strength
+        if (password.length > 7) strength += 1;
+        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1;
+        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))  strength += 1;
+        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1;
+        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
+
+        if (strength < 2) {
+
+            // Call modal
+            passwordCheckModal()
+
+            // Change the text content
+            modalHeadre.textContent = "Ooops!"
+            modalMessage.textContent = "Password too weak!"
+
+            //  Clear password fields
+            signUpForm.password.value = ""
+            signUpForm.passwordconf.value = ""
+
+            // Close modal
+            modalClose()
+
+            return;
+
+        } else if (strength === 2) {
+
+            // Call modal
+            //passwordCheckModal()
+
+            // Change the text content
+            // modalHeadre.textContent = "Ooops!"
+            // modalMessage.textContent = "Medium strength password!"
+
+            //  Clear password fields
+            // signUpForm.password.value = ""
+            // signUpForm.passwordconf.value = ""
+
+            // Close modal
+            // modalClose()
+
+        } else {
+
+            // Call modal
+            // passwordCheckModal()
+
+            // Change the text content
+            // modalHeadre.textContent = "Ooops!"
+            // modalMessage.textContent = "Strong password!"
+
+            // Close modal
+            // modalClose()
+
+        }
+
+        // Create user and direct to tasks.html
+        createUserWithEmailAndPassword(auth, email, password).then((cred) => {
+            signUpForm.reset()
+        }).then((userCredential) => {
+            // User signed in
+            window.location = "tasks.html";
+            // todo get it work
+            //const user = userCredential.user;
+            // todo delete
+            //console.log(user)
+            // ...
+        }).catch((err) => {
+            console.log(err.message + err.code)
+        })
+    } else {
+
+        // Call modal
+        passwordCheckModal()
+
+        // Change the text content
+        modalMessage.textContent = "Password does not match!";
+        modalHeadre.textContent = 'Oooops!'
+
+        //  Clear password fields
+        signUpForm.password.value = ""
+        signUpForm.passwordconf.value = ""
+
+        // close modal
+        modalClose()
+
+        return;
+    }
+
+}
+
+//  end.            ***********************
+
 
 // Initialize Cloud Firestore and get a reference to the service
 //const db = getFirestore(app)

@@ -27,31 +27,36 @@ const auth = getAuth(app);
 // end. *****************************************
 
 //  Check if the user is already logged in   *****************************
+//  todo fix it
+function ifUserLoggedIn(){
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, redirect to another page
+            location.href = "tasks.html";
+        } else {
+            // No user is signed in, redirect to the login page
+            location.href = "index.html";
+        }
+    });
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in.
-        //todo clean up
-        console.log("User is logged in:", user.email);
-        window.location = "tasks.html";
-    } else {
-        // No user is signed in.
-        // todo clean up
-        console.log("No user is logged in.");
-        window.location = "index.html";
-    }
-});
+}
+
 
 //  end.    ********************************
 
 //  Call function depends on index.html/login or register.html/signup loaded    **********
-    window.onload = function() {
-        if (window.location.href.indexOf("index.html") > -1) {
-            userLogin();
-        }else {
-            userSignUp()
-        }
-    }
+//     window.onload = function() {
+//         ifUserLoggedIn()
+        // if (window.location.href.indexOf("index.html") > -1) {
+        //     // ifUserLoggedIn()
+        //     userLogin();
+        // }else {
+        //     userSignUp()
+        // }
+   // }
+    document.addEventListener("DOMContentLoaded", function(event) {
+        ifUserLoggedIn()
+    });
 
 //  end.    ***************************************
 

@@ -14550,11 +14550,12 @@ function checkPasswordStrength() {
 
         }
 
-        // create user
+        // Create user and direct to tasks.html
         (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(auth, email, password).then((cred) => {
             signUpForm.reset()
         }).then((userCredential) => {
-            // Signed in
+            // User signed in
+            window.location = "tasks.html";
             // todo get it work
             //const user = userCredential.user;
             // todo delete

@@ -147,11 +147,12 @@ function checkPasswordStrength() {
 
         }
 
-        // create user
+        // Create user and direct to tasks.html
         createUserWithEmailAndPassword(auth, email, password).then((cred) => {
             signUpForm.reset()
         }).then((userCredential) => {
-            // Signed in
+            // User signed in
+            window.location = "tasks.html";
             // todo get it work
             //const user = userCredential.user;
             // todo delete

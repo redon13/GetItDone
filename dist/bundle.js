@@ -14429,16 +14429,87 @@ const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebase
 const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);
 // end. *****************************************
 
+//  Check if the user is already logged in   *****************************
+
+(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, (user) => {
+    if (user) {
+        // User is signed in.
+        //todo clean up
+        console.log("User is logged in:", user.email);
+        window.location = "tasks.html";
+    } else {
+        // No user is signed in.
+        // todo clean up
+        console.log("No user is logged in.");
+        window.location = "index.html";
+    }
+});
+
+//  end.    ********************************
+
+//  Call function depends on index.html/login or register.html/signup loaded    **********
+    window.onload = function() {
+        if (window.location.href.indexOf("index.html") > -1) {
+            userLogin();
+        }else {
+            userSignUp()
+        }
+    }
+
+//  end.    ***************************************
+
+
+// Log user in  *********************
+function userLogin() {
+    const logInForm = document.querySelector('.login')
+    const loginEmail = logInForm.email.value
+    const loginPassword = logInForm.password.value
+
+    logInForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        ;(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(auth, loginEmail, loginPassword)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // todo delete
+                console.log("User login OK !!!")
+                // User signed in
+                window.location = "tasks.html";
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // todo delete
+                console.log("User login failed !!!")
+
+                // Call modal
+                passwordCheckModal()
+
+                // Change the text content
+                modalMessage.textContent = "Wrong email or password!";
+                modalHeadre.textContent = 'Oooops!'
+
+                // close modal
+                modalClose()
+            });
+    })
+}
+//  end.    *************************
 
 // signing user up  ***********************
-const signUpForm = document.querySelector('.signup')
-signUpForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+function userSignUp(){
+    const signUpForm = document.getElementById("signup")
+    signUpForm.addEventListener('submit', (e) => {
+        e.preventDefault()
 
-    // checking passwords
-    checkPasswordStrength()
+        // checking passwords
+        checkPasswordStrength()
 
-})
+    })
+}
+
 //  end.    *******************************
 
 function modalClose(){

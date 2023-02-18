@@ -14445,6 +14445,7 @@ const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);
 
 //  end.    ***************************************
 
+//  Switch between login and signup forms    **********
 const loginFormContainer = document.getElementById('loginFormContainer')
 const signupFormContainer = document.getElementById('signupFormContainer')
 const toSignupFormBtn = document.getElementById('toSignupFormBtn')
@@ -14457,45 +14458,56 @@ toLoginFormBtn.addEventListener('click', (e) => {
     loginFormContainer.style.display = "none";
     signupFormContainer.style.display = "";
 })
+// end.    ***************************************
 
-// signupFormContainer.style.display = "none";
 
 // Log user in  *********************
+    const logInForm = document.getElementById('login')
 
-    // const logInForm = document.querySelector('.login')
-    // const loginEmail = logInForm.email.value
-    // const loginPassword = logInForm.password.value
-    //
-    // logInForm.addEventListener('submit', (e) => {
-    //     e.preventDefault()
-    //
-    //     console.log("User login attempt !!!")
-    //
-    //     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-    //         .then((userCredential) => {
-    //             // Signed in
-    //             const user = userCredential.user;
-    //             // todo delete
-    //             console.log("User login OK !!!")
-    //             // User signed in
-    //             window.location = "tasks.html";
-    //             // ...
-    //         })
-    //         .catch((error) => {
-    //             const errorCode = error.code;
-    //             const errorMessage = error.message;
-    //             // todo delete
-    //             console.log("User login failed !!!")
-    //
-    //             // Call modal
-    //
-    //             // Change the text content
-    //             modalMessage.textContent = "Wrong email or password!";
-    //             modalHeadre.textContent = 'Oooops!'
-    //
-    //             // close modal
-    //         });
-    // })
+    logInForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        const loginEmail = logInForm.loginEmail.value
+        const loginPassword = logInForm.loginPassword.value
+        const passwordCheckModal = document.getElementById('passwordCheckModal')
+        const modalMessage = document.getElementById('modalMessage')
+        const modalHeader = document.getElementById('modalHeader')
+
+
+        ;(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(auth, loginEmail, loginPassword)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+
+                // User signed in
+                window.location = "tasks.html";
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+
+
+                // Call modal
+                passwordCheckModal.classList.add("show");
+                passwordCheckModal.style.display = "block";
+
+                // Change the text content
+                modalMessage.textContent = "Wrong email or password!";
+                modalHeader.textContent = 'Oooops!'
+
+                signupFormContainer.style.display = "none";
+                loginFormContainer.style.display = "";
+
+                //  Clear password fields
+                signupForm.passwordSignup.value = ""
+                signupForm.passwordconfSignup.value = ""
+
+                // close modal
+                closeModal()
+            });
+    })
 //  end.    *************************
 
 
@@ -14509,7 +14521,7 @@ signupForm.addEventListener('submit', (e) => {
     const passwordconfSignup = signupForm.passwordconfSignup.value
     const passwordCheckModal = document.getElementById('passwordCheckModal')
     const modalMessage = document.getElementById('modalMessage')
-    const modalHeadre = document.getElementById('modalHeader')
+    const modalHeader = document.getElementById('modalHeader')
 
     // todo delete
     console.log("User signup attempt !!!")
@@ -14524,7 +14536,7 @@ signupForm.addEventListener('submit', (e) => {
         passwordCheckModal.style.display = "block";
 
         // Change the text content
-        modalHeadre.textContent = "Ooops!"
+        modalHeader.textContent = "Ooops!"
         modalMessage.textContent = "Passwords do not match!"
 
         signupFormContainer.style.display = "";
@@ -14550,7 +14562,7 @@ signupForm.addEventListener('submit', (e) => {
                 console.log(err.message)
 
                 // Change the modal text
-                modalHeadre.textContent = "Ooops!"
+                modalHeader.textContent = "Ooops!"
                 modalMessage.textContent = "Something went wrong! Try again!"
                 passwordCheckModal.classList.add("show");
                 passwordCheckModal.style.display = "block";

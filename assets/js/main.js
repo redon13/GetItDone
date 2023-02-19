@@ -1,7 +1,7 @@
 // Firebase import    *******************
 import { initializeApp } from "firebase/app";
 //import { getFirestore } from "firebase/firestore";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import {getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 // end. **************************
 
 
@@ -27,14 +27,30 @@ initializeApp(firebaseConfig);
 //  Init services   *****************************
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+// const user = auth.currentUser;
 // end. *****************************************
 
 
 // Check if user logged in **********************
 const userCheck = onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in, redirect to another page
+        // todo delete
         console.log("User logged in on Tasks page")
+        // const user = auth.currentUser;
+        // User is signed in, display their details
+        const uid = user.uid;
+        const email = user.email;
+        const displayName = getUsernameFromEmail(email);
+        const photoURL = user.photoURL;
+        const navUser = document.getElementById('offcanvasNavbarLabel')
+
+        console.log("User ID:", uid);
+        console.log("Email:", email);
+        console.log("Display name:", displayName);
+        console.log("Photo URL:", photoURL);
+
+        navUser.textContent = displayName
+
     } else {
         // No user is signed in, redirect to the login page
         location.href = "index.html";
@@ -57,3 +73,60 @@ logoutButton.addEventListener('click', () => {
         })
 })
 //  end.    ******************************************
+
+
+const requestFormModal = document.getElementById('requestFormModal')
+const requestJobBtn = document.getElementById('requestJobBtn')
+
+requestJobBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    // Call modal
+    requestFormModal.classList.add("show");
+    requestFormModal.style.display = "block";
+
+    // Change the text content
+    //modalMessage.textContent = "Wrong email or password!";
+    modalHeader.textContent = 'Job request!'
+
+    // signupFormContainer.style.display = "none";
+    // loginFormContainer.style.display = "";
+    //
+    // //  Clear password fields
+    // logInForm.loginEmail.value = ""
+    // logInForm.loginPassword.value = ""
+
+    // close modal
+    closeModal()
+})
+
+
+//  Generate user name from email   *******************
+function getUsernameFromEmail(email) {
+    const username = "Hello @" + email.split('@')[0];
+    return username;
+}
+//  end.    *******************************************
+
+
+function closeModal() {
+    // Modal buttons
+    const closeModalXBtn = document.getElementById("closeModalXBtn")
+    const requestJoblBtn = document.getElementById("requestJoblBtn")
+    const cancelRequestBtn = document.getElementById('cancelRequestBtn')
+
+    closeModalXBtn.addEventListener("click", function () {
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
+    });
+
+    cancelRequestBtn.addEventListener("click", function () {
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
+    });
+
+    requestJoblBtn.addEventListener("click", function () {
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
+    });
+}

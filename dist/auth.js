@@ -14409,9 +14409,6 @@ __webpack_require__.r(__webpack_exports__);
 
 // end. **************************
 
-// Import main.js  *******************
-// import ".assets/js/main.js"
-// end.  **************************
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional ***************
 const firebaseConfig = {

@@ -10,12 +10,11 @@
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="assets/css/util.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-  <!--===============================================================================================-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <!--===============================================================================================-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" integrity="sha384-He3RckdFB2wffiHOcESa3sf4Ida+ni/fw9SSzAcfY2EPnU1zkK/sLUzw2C5Tyuhj" crossorigin="anonymous">
-
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
   <title>Tasks</title>
 </head>
@@ -110,7 +109,7 @@
     <div class="modal-content">
 
 <!--      Modal header  -->
-      <div class="modal-header">
+      <div class="modal-header bg-primary .bg-gradient text-white">
         <h1 class="modal-title fs-5" id="modalHeader">""</h1>
         <button type="button" id="closeModalXBtn" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -126,27 +125,27 @@
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Note:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" id="message-text" style="resize: none;"></textarea>
           </div>
         </form>
 <!--  Request Form Modal end.  -->
 
 <!--        Centre Location -->
         <label for="locationCentre" class="col-form-label">Location:</label>
-        <div class="row" id="locationCentre">
-          <div class="dropdown col-sm-6" id="locationLdc">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Location LDC
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Admission</a></li>
-              <li><a class="dropdown-item" href="#">Retail</a></li>
-              <li><a class="dropdown-item" href="#">Cafe</a></li>
-              <li><a class="dropdown-item" href="#">HOB</a></li>
-              <li><a class="dropdown-item" href="#">Back of house</a></li>
-              <li><a class="dropdown-item" href="#">Centre</a></li>
-            </ul>
-          </div>
+        <div class="row mb-3" id="locationCentre">
+            <div class="dropdown col-sm-6" id="locationLdc">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Location LDC
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Admission</a></li>
+                <li><a class="dropdown-item" href="#">Retail</a></li>
+                <li><a class="dropdown-item" href="#">Cafe</a></li>
+                <li><a class="dropdown-item" href="#">HOB</a></li>
+                <li><a class="dropdown-item" href="#">Back of house</a></li>
+                <li><a class="dropdown-item" href="#">Centre</a></li>
+              </ul>
+            </div>
 
           <div class="dropdown col-sm-6" id="locationSl">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -165,37 +164,43 @@
 
 <!--        Safety issue  -->
         <label for="safetyIssue" class="col-form-label">Safety issue:</label>
-        <div class="mb-3" id="safetyIssue">
+          <div class="col-lg-12 mb-3" id="safetyIssue">
 
-          <div class="form-check form-check-inline col-md-3">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">No</label>
+            <div class="form-check form-check-inline col-lg-6">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">No</label>
+            </div>
+            <div class="form-check form-check-inline col-lg-6">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <label class="form-check-label" for="inlineRadio2">Yes</label>
+            </div>
           </div>
-          <div class="form-check form-check-inline col-md-3">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">Yes</label>
-          </div>
-        </div>
+
+
 <!--  Safety issue end.  -->
 
 <!--        Info  -->
-        <div class="mb-3">
-          <label class="col-form-label" id="jobNumber">Job number:</label>
-<!--          <input type="text" class="form-control" id="jobNumber">-->
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="col-form-label" id="jobNumber">Job number:</label>
+              <span>3</span>
+            </div>
+            <div class="mb-3">
+              <label id="date" class="col-form-label">Date:</label>
+              <span>3/2/23</span>
+            </div>
+            <div class="mb-3">
+              <label id="user" class="col-form-label">Requested by:</label>
+              <span>@user</span>
+            </div>
+            <div class="mb-3">
+              <label id="imgLib" class="col-form-label">Attached images</label>
+              <span>No image</span>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label id="date" class="col-form-label">Date:</label>
-<!--          <input type="text" class="form-control" id="date">-->
-        </div>
-        <div class="mb-3">
-          <label id="user" class="col-form-label">Requested by:</label>
-<!--          <input type="text" class="form-control" id="user">-->
 
-        <div class="mb-3">
-          <label id="imgLib" class="col-form-label">Attached images</label>
-          <!--          <input type="text" class="form-control" id="user">-->
-        </div>
-      </div>
 <!--      Info end. -->
 
 <!--      MModal footer -->

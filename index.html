@@ -23,7 +23,7 @@
 <div class="limiter" id="loginFormContainer">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form login">
+            <form class="login100-form validate-form" id="login">
 					<span class="login100-form-title p-b-26">
 						Get It Done
 					</span>
@@ -32,7 +32,7 @@
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-                    <input class="input100" type="email" name="email" id="loginEmail">
+                    <input class="input100" type="email" name="loginEmail">
                     <span class="focus-input100" data-placeholder="Email"></span>
                 </div>
 
@@ -40,7 +40,7 @@
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-                    <input class="input100" type="password" name="password" id="loginPassword">
+                    <input class="input100" type="password" name="loginPassword">
                     <span class="focus-input100" data-placeholder="Password"></span>
                 </div>
 
@@ -54,11 +54,6 @@
                 </div>
 
                 <div class="text-center p-t-115">
-
-<!--                   todo remove link to tasks.html!!!!!        -->
-						<span class="txt1" onclick="location.href = 'tasks.html'">
-							Don’t have an account?
-						</span>
 
                     <a class="txt2" id="toLoginFormBtn" ">
                         Sign Up

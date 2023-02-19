@@ -29,19 +29,6 @@ const auth = getAuth(app);
 //  Check if the user is already logged in on page load    **********
 
 
-//  Call function depends on index.html/login or register.html/signup loaded    **********
-//     window.onload = function() {
-//         ifUserLoggedIn()
-        // if (window.location.href.indexOf("index.html") > -1) {
-        //     // ifUserLoggedIn()
-        //     userLogin();
-        // }else {
-        //     userSignUp()
-        // }
-   // }
-
-//  end.    ***************************************
-
 //  Switch between login and signup forms    **********
 const loginFormContainer = document.getElementById('loginFormContainer')
 const signupFormContainer = document.getElementById('signupFormContainer')
@@ -84,8 +71,6 @@ toLoginFormBtn.addEventListener('click', (e) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
 
-
-
                 // Call modal
                 passwordCheckModal.classList.add("show");
                 passwordCheckModal.style.display = "block";
@@ -119,12 +104,6 @@ signupForm.addEventListener('submit', (e) => {
     const passwordCheckModal = document.getElementById('passwordCheckModal')
     const modalMessage = document.getElementById('modalMessage')
     const modalHeader = document.getElementById('modalHeader')
-
-    // todo delete
-    console.log("User signup attempt !!!")
-    console.log("email: ", emailSignup)
-    console.log("password: ", passwordSignup)
-    console.log("password conf: ", passwordconfSignup)
 
     // Check if password match
     if (passwordSignup !== passwordconfSignup) {
@@ -168,16 +147,8 @@ signupForm.addEventListener('submit', (e) => {
     }
 })
 
-
-    // const signUpForm = document.getElementById("signup")
-    // signUpForm.addEventListener('submit', (e) => {
-    //     e.preventDefault()
-    //
-    //     // checking passwords
-    //
-    // })
-
 //  end.    *******************************
+
 
 function closeModal() {
     // modal clos X button
@@ -196,6 +167,7 @@ function closeModal() {
     });
 }
 
+
 //  password check   not in use ***********************
 function passwordCheck() {
     const email = signUpForm.email.value
@@ -203,7 +175,6 @@ function passwordCheck() {
     const passwconf = signUpForm.passwordconf.value
     const modalMessage = document.getElementById('modalMessage')
     const modalHeadre = document.getElementById('modalHeader')
-
 
     let strength = 0;
 
@@ -283,9 +254,7 @@ function passwordCheck() {
             window.location = "tasks.html";
             // todo get it work
             //const user = userCredential.user;
-            // todo delete
-            //console.log(user)
-            // ...
+
         }).catch((err) => {
             console.log(err.message + err.code)
         })

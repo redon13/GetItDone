@@ -20,6 +20,7 @@
 </head>
 <body>
 
+<!--    Login form  -->
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -32,16 +33,16 @@
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-                    <input class="input100" type="email" name="email" id="loginEmail">
-                    <span class="focus-input100" data-placeholder="Email"></span>
+                    <input class="input100" type="email" name="email" id="loginEmail" placeholder="Email">
+<!--                    <span class="focus-input100" data-placeholder="Email"></span>-->
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-                    <input class="input100" type="password" name="password" id="loginPassword">
-                    <span class="focus-input100" data-placeholder="Password"></span>
+                    <input class="input100" type="password" name="password" id="loginPassword" placeholder="Password">
+<!--                    <span class="focus-input100" data-placeholder="Password"></span>-->
                 </div>
 
                 <div class="container-login100-form-btn">
@@ -68,7 +69,26 @@
         </div>
     </div>
 </div>
+<!-- Login form end.    -->
 
+<!-- Modal -->
+<div class="modal fade" id="passwordCheckModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalHeader">""</h1>
+                <button type="button" id="closeModalXBtn" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 id="modalMessage">""</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModalBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    Modal end.  -->
 <!--===============================================================================================-->
 <!--===============================================================================================-->
 <script src="dist/bundle.js"></script>

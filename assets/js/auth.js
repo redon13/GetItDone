@@ -26,23 +26,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 // end. *****************************************
 
-//  Check if the user is already logged in   *****************************
-//  todo fix it
-function ifUserLoggedIn(){
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, redirect to another page
-            location.href = "tasks.html";
-        } else {
-            // No user is signed in, redirect to the login page
-            location.href = "index.html";
-        }
-    });
-
-}
 
 
-//  end.    ********************************
 
 //  Call function depends on index.html/login or register.html/signup loaded    **********
 //     window.onload = function() {
@@ -263,3 +248,15 @@ function checkPasswordStrength() {
 
 // Initialize Cloud Firestore and get a reference to the service
 //const db = getFirestore(app)
+
+//  Check if the user is already logged in   *****************************
+//  todo fix it
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, redirect to another page
+        location.href = "tasks.html";
+    } else {
+        // No user is signed in, redirect to the login page
+        location.href = "index.html";
+    }
+});

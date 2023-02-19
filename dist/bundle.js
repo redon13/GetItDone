@@ -14429,23 +14429,8 @@ const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebase
 const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);
 // end. *****************************************
 
-//  Check if the user is already logged in   *****************************
-//  todo fix it
-function ifUserLoggedIn(){
-    (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, (user) => {
-        if (user) {
-            // User is signed in, redirect to another page
-            location.href = "tasks.html";
-        } else {
-            // No user is signed in, redirect to the login page
-            location.href = "index.html";
-        }
-    });
-
-}
 
 
-//  end.    ********************************
 
 //  Call function depends on index.html/login or register.html/signup loaded    **********
 //     window.onload = function() {
@@ -14666,6 +14651,18 @@ function checkPasswordStrength() {
 
 // Initialize Cloud Firestore and get a reference to the service
 //const db = getFirestore(app)
+
+//  Check if the user is already logged in   *****************************
+//  todo fix it
+(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, (user) => {
+    if (user) {
+        // User is signed in, redirect to another page
+        location.href = "tasks.html";
+    } else {
+        // No user is signed in, redirect to the login page
+        location.href = "index.html";
+    }
+});
 })();
 
 /******/ })()

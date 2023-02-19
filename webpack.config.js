@@ -7,7 +7,7 @@ module.exports ={
     // entry: './assets/js/auth.js',
     entry: {
         auth: './assets/js/auth.js',
-        tasks: './assets/js/main.js',
+        main: './assets/js/main.js',
     },
     // The location of the build folder described above
     output: {

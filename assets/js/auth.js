@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 // end. **************************
 
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional ***************
 const firebaseConfig = {
     apiKey: "AIzaSyCgSEjzaQMv6Cisttwa8ULNAtS9O-qPhkk",

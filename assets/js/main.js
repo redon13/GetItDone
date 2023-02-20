@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc,
-    query, where,
+    query, where, getDocs,
     orderBy, serverTimestamp,
     updateDoc
 } from 'firebase/firestore'
@@ -33,8 +33,8 @@ initializeApp(firebaseConfig);
 //  Init services   *****************************
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore()
-// const user = auth.currentUser;
+const db = getFirestore(app)
+const user = auth.currentUser;
 // end. *****************************************
 
 
@@ -51,6 +51,7 @@ const userCheck = onAuthStateChanged(auth, (user) => {
         const photoURL = user.photoURL;
         const navUser = document.getElementById('offcanvasNavbarLabel')
 
+        // todo delete
         console.log("User ID:", uid);
         console.log("Email:", email);
         console.log("Display name:", displayName);
@@ -145,58 +146,55 @@ function closeModal() {
 //  end.    *******************************************
 
 
-//  Add new task   ***********************************
+// Add data to the collection from an HTML form ********
+const collectionRef = collection(db, 'tasks');
+const requestForm = document.getElementById('requestForm');
+const newRequestBtn = document.getElementById('newRequestBtn')
+newRequestBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const jobDescription = document.getElementById('jobDescription').value;
+    const note = document.getElementById('note').value;
+    // const message = form.querySelector('#message').value;
 
+    // Check for safety issues
+    const issue = checkSafetyIssue('issue')
 
-// Check if a collection exists, create it if it doesn't
-const collectionRef = db.collection('tasks');
-collectionRef.get().then((querySnapshot) => {
-    if (querySnapshot.empty) {
-        collectionRef.doc('sampleDoc').set({ sampleField: 'sampleValue' });
+    try {
+        await addDoc(collectionRef, {
+            jobDescription: jobDescription,
+            note: note,
+            issue: issue,
+            timestamp: serverTimestamp()
+        });
+        console.log('Data added successfully!');
+         clearRequestForm();
+    } catch (error) {
+        console.error('Error adding data: ', error);
     }
 });
+//  end.    *******************************************
 
-const addNewTask = document.querySelector('.requestForm')
-const newRequestBtn = document.getElementById('newRequestBtn');
 
-// Add data to the collection from an HTML form
-const form = document.querySelector('form');
-newRequestBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+// Check for safety issues ****************************
+function checkSafetyIssue(issue) {
+    const nosSafetyIssue = document.getElementById('noSafetyIssue')
+    const yesSafetyIssue = document.getElementById('yesSafetyIssue')
 
-    const jobDescription = form.querySelector('.jobDescription').value;
-    const note = form.querySelector('.note').value;
-    const message = form.querySelector('#message').value;
+    if (nosSafetyIssue.checked) {
+        console.log('No safety issue')
+        issue = 'No safety issue'
+    } else if (yesSafetyIssue.checked){
+        console.log('Yes safety issue')
+        issue = 'Yes safety issue'
+    }
+    return issue
+}
+// end.    *******************************************
 
-    collectionRef.add({
-        jobDescription: jobDescription,
-        note: note,
-        message: message,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-        console.log('Data added successfully!');
-        form.reset();
-    }).catch((error) => {
-        console.error('Error adding data: ', error);
-    });
-});
 
-// newRequestBtn.addEventListener('click', (e) => {
-//     e.preventDefault()
-//
-//     console.log('collection ref: ', colRef)
-//     addDoc(colRef, {
-//         jobDescription: addNewTask.jobDescription.value,
-//         note: addNewTask.note.value,
-//         //location: addNewTask.location.value,
-//         //date: addNewTask.date.value,
-//         //safety: addNewTask.safety.value,
-//         //taskNumber: addNewTask.taskNumber.value,
-//         requestedBy: 'user',
-//         createdAt: serverTimestamp()
-//     })
-//         .then(() => {
-//             console.log('New task added')
-//             addNewTask.reset()
-//         })
-// })
+// Clear form after submit ****************************
+function clearRequestForm() {
+    const jobDescription = document.getElementById('jobDescription').value = '';
+    const note = document.getElementById('note').value = '';
+}
+//  end.    *******************************************

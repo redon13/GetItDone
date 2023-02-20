@@ -5,11 +5,5 @@
 // All jobs
 @import "all_jobs";
 
-textarea.form-control {
-  min-height: calc(1.5em + 3.5rem + 2px);
-}
-
-.btn-extra-style {
-  --bs-btn-padding-x: 6rem;
-  --bs-btn-padding-y: .8rem
-}
+// Tasks
+@import "tasks";

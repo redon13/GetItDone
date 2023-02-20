@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" integrity="sha384-He3RckdFB2wffiHOcESa3sf4Ida+ni/fw9SSzAcfY2EPnU1zkK/sLUzw2C5Tyuhj" crossorigin="anonymous">
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="assets/css/tasks.css">
 
   <title>Tasks</title>
 </head>
@@ -105,7 +107,7 @@
 
 <!-- Request Form Modal -->
 <div class="modal fade" id="requestFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-fullscreen modal-dialog-scrollable">
     <div class="modal-content">
 
 <!--      Modal header  -->
@@ -130,10 +132,12 @@
         </form>
 <!--  Request Form Modal end.  -->
 
+
 <!--        Centre Location -->
-        <label for="locationCentre" class="col-form-label">Location:</label>
-        <div class="row mb-3" id="locationCentre">
-            <div class="dropdown col-sm-6" id="locationLdc">
+        <div class="container">
+          <label for="locationCentre" class="col-form-label">Location:</label>
+          <div class="row justify-content-center mb-3" id="locationCentre">
+            <div class="col-6">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Location LDC
               </button>
@@ -147,31 +151,34 @@
               </ul>
             </div>
 
-          <div class="dropdown col-sm-6" id="locationSl">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Location Sealife
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Admission</a></li>
-              <li><a class="dropdown-item" href="#">Retail</a></li>
-              <li><a class="dropdown-item" href="#">Back of house</a></li>
-              <li><a class="dropdown-item" href="#">Centre</a></li>
-            </ul>
+            <div class="col-6">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Location Sealife
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Admission</a></li>
+                <li><a class="dropdown-item" href="#">Retail</a></li>
+                <li><a class="dropdown-item" href="#">Back of house</a></li>
+                <li><a class="dropdown-item" href="#">Centre</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-<!--  Centre location end.  -->
+        <!--  Centre location end.  -->
 
 
-<!--        Safety issue  -->
-        <label for="safetyIssue" class="col-form-label">Safety issue:</label>
-          <div class="col-lg-12 mb-3" id="safetyIssue">
-
-            <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-success btn-extra-style" for="success-outlined">NO</label>
-
-            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-            <label class="btn btn-outline-danger btn-extra-style" for="danger-outlined">YES</label>
-
+        <!--        Safety issue  -->
+        <div class="container">
+          <label for="safetyIssue" class="col-form-label">Safety issue:</label>
+          <div class="row mb-3 justify-content-center" id="safetyIssue">
+            <div class="col-6">
+              <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+              <label class="btn btn-outline-success btn-style-extra" for="success-outlined">NO</label>
+            </div>
+            <div class="col-6">
+              <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+              <label class="btn btn-outline-danger btn-style-extra" for="danger-outlined">YES</label>
+            </div>
 <!--            <div class="form-check form-check-inline ">-->
 <!--              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>-->
 <!--              <label class="form-check-label" for="inlineRadio1">No</label>-->
@@ -181,7 +188,7 @@
 <!--              <label class="form-check-label" for="inlineRadio2">Yes</label>-->
 <!--            </div>-->
           </div>
-
+        </div>
 
 <!--  Safety issue end.  -->
 

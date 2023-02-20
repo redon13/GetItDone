@@ -127,7 +127,7 @@
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Note:</label>
-            <textarea class="form-control" id="message-text" style="resize: none;"></textarea>
+            <textarea class="form-control" id="message-text" style="resize: none;" maxlength="130"></textarea>
           </div>
         </form>
 <!--  Request Form Modal end.  -->
@@ -179,45 +179,48 @@
               <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
               <label class="btn btn-outline-danger btn-style-extra" for="danger-outlined">YES</label>
             </div>
-<!--            <div class="form-check form-check-inline ">-->
-<!--              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>-->
-<!--              <label class="form-check-label" for="inlineRadio1">No</label>-->
-<!--            </div>-->
-<!--            <div class="form-check form-check-inline ">-->
-<!--              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">-->
-<!--              <label class="form-check-label" for="inlineRadio2">Yes</label>-->
-<!--            </div>-->
           </div>
         </div>
 
 <!--  Safety issue end.  -->
 
-<!--        Info  -->
-        <div class="card">
+<!--        Info Card   -->
+        <div class="card mt-10">
           <div class="card-body">
-            <div class="mb-3">
+            <div class="">
               <label class="col-form-label" id="jobNumber">Job number:</label>
               <span>3</span>
             </div>
-            <div class="mb-3">
+            <div class="">
               <label id="date" class="col-form-label">Date:</label>
               <span>3/2/23</span>
             </div>
-            <div class="mb-3">
+            <div class="">
               <label id="user" class="col-form-label">Requested by:</label>
               <span>@user</span>
             </div>
-            <div class="mb-3">
+            <div class="">
               <label id="imgLib" class="col-form-label">Attached images</label>
               <span>No image</span>
             </div>
           </div>
         </div>
+<!--      Info card end. -->
 
-<!--      Info end. -->
+<!--         Add photo  -->
+        <div class="container">
+          <div class="row justify-content-center mt-3">
+            <div class="col-4">
+              <button type="button" class="btn btn-secondary">Add image</button>
+            </div>
+          </div>
+        </div>
+
+        <!--        Add photo end.  -->
+
 
 <!--      MModal footer -->
-      <div class="modal-footer">
+      <div class="modal-footer mt-3">
         <button type="button" id="requestJoblBtn" class="btn btn-secondary" data-bs-dismiss="modal">Request</button>
         <button type="button" id="cancelRequestBtn" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>

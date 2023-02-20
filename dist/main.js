@@ -14480,6 +14480,7 @@ logoutButton.addEventListener('click', () => {
 
 const requestFormModal = document.getElementById('requestFormModal')
 const requestJobBtn = document.getElementById('requestJobBtn')
+const floatingBtn = document.getElementById('floatingBtn')
 
 requestJobBtn.addEventListener('click', (e) => {
     e.preventDefault()
@@ -14489,7 +14490,6 @@ requestJobBtn.addEventListener('click', (e) => {
     requestFormModal.style.display = "block";
 
     // Change the text content
-    //modalMessage.textContent = "Wrong email or password!";
     modalHeader.textContent = 'Job request!'
 
     // signupFormContainer.style.display = "none";
@@ -14498,6 +14498,9 @@ requestJobBtn.addEventListener('click', (e) => {
     // //  Clear password fields
     // logInForm.loginEmail.value = ""
     // logInForm.loginPassword.value = ""
+
+    // Make floating button appear
+    floatingBtn.style.display = "none"
 
     // close modal
     closeModal()
@@ -14521,16 +14524,25 @@ function closeModal() {
     closeModalXBtn.addEventListener("click", function () {
         requestFormModal.classList.add("hide");
         requestFormModal.style.display = "none";
+
+        // Make floating button disappear
+        floatingBtn.style.display = "block"
     });
 
     cancelRequestBtn.addEventListener("click", function () {
         requestFormModal.classList.add("hide");
         requestFormModal.style.display = "none";
+
+        // Make floating button disappear
+        floatingBtn.style.display = "block"
     });
 
     requestJoblBtn.addEventListener("click", function () {
         requestFormModal.classList.add("hide");
         requestFormModal.style.display = "none";
+
+        // Make floating button disappear
+        floatingBtn.style.display = "block"
     });
 }
 })();

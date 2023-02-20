@@ -14401,8 +14401,6 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-
-
 // Firebase import    *******************
 
 //import { getFirestore } from "firebase/firestore";
@@ -14421,264 +14419,120 @@ const firebaseConfig = {
     appId: "1:580777068532:web:556796d73378e03d0e9ba1",
     measurementId: "G-6RYDBF0FDH"
 };
-
 // end.  ******************************************************
+
 
 // Initialize Firebase  *************************
 (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
+//  end ****************************************
+
+
+//  Init services   *****************************
 const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
 const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);
+// const user = auth.currentUser;
 // end. *****************************************
 
-//  Check if the user is already logged in on page load    **********
 
+// Check if user logged in **********************
+const userCheck = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, (user) => {
+    if (user) {
+        // todo delete
+        console.log("User logged in on Tasks page")
+        // const user = auth.currentUser;
+        // User is signed in, display their details
+        const uid = user.uid;
+        const email = user.email;
+        const displayName = getUsernameFromEmail(email);
+        const photoURL = user.photoURL;
+        const navUser = document.getElementById('offcanvasNavbarLabel')
 
-//  Switch between login and signup forms    **********
-const loginFormContainer = document.getElementById('loginFormContainer')
-const signupFormContainer = document.getElementById('signupFormContainer')
-const toSignupFormBtn = document.getElementById('toSignupFormBtn')
-const toLoginFormBtn = document.getElementById('toLoginFormBtn')
-toSignupFormBtn.addEventListener('click', (e) => {
-    loginFormContainer.style.display = "";
-    signupFormContainer.style.display = "none";
+        console.log("User ID:", uid);
+        console.log("Email:", email);
+        console.log("Display name:", displayName);
+        console.log("Photo URL:", photoURL);
+
+        navUser.textContent = displayName
+
+    } else {
+        // No user is signed in, redirect to the login page
+        location.href = "index.html";
+    }
+});
+
+window.onload = userCheck()
+
+// Logging user out *************************************
+const logoutButton = document.querySelector('.logoutBtn')
+logoutButton.addEventListener('click', () => {
+    ;(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signOut)(auth)
+        .then(() => {
+            console.log('user signed out')
+            // No user is signed in, redirect to the login page
+            location.href = "index.html";
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
 })
-toLoginFormBtn.addEventListener('click', (e) => {
-    loginFormContainer.style.display = "none";
-    signupFormContainer.style.display = "";
-})
-// end.    ***************************************
+//  end.    ******************************************
 
 
-// Log user in  *********************
-    const logInForm = document.getElementById('login')
+const requestFormModal = document.getElementById('requestFormModal')
+const requestJobBtn = document.getElementById('requestJobBtn')
 
-    logInForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-
-        const loginEmail = logInForm.loginEmail.value
-        const loginPassword = logInForm.loginPassword.value
-        const passwordCheckModal = document.getElementById('passwordCheckModal')
-        const modalMessage = document.getElementById('modalMessage')
-        const modalHeader = document.getElementById('modalHeader')
-
-
-        ;(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(auth, loginEmail, loginPassword)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-
-                // User signed in
-                window.location = "tasks.html";
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                // Call modal
-                passwordCheckModal.classList.add("show");
-                passwordCheckModal.style.display = "block";
-
-                // Change the text content
-                modalMessage.textContent = "Wrong email or password!";
-                modalHeader.textContent = 'Oooops!'
-
-                signupFormContainer.style.display = "none";
-                loginFormContainer.style.display = "";
-
-                //  Clear password fields
-                logInForm.loginEmail.value = ""
-                logInForm.loginPassword.value = ""
-
-                // close modal
-                closeModal()
-            });
-    })
-//  end.    *************************
-
-
-// signing users up ***********************
-const signupForm = document.getElementById('signup')
-signupForm.addEventListener('submit', (e) => {
+requestJobBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
-    const emailSignup = signupForm.emailSignup.value
-    const passwordSignup = signupForm.passwordSignup.value
-    const passwordconfSignup = signupForm.passwordconfSignup.value
-    const passwordCheckModal = document.getElementById('passwordCheckModal')
-    const modalMessage = document.getElementById('modalMessage')
-    const modalHeader = document.getElementById('modalHeader')
+    // Call modal
+    requestFormModal.classList.add("show");
+    requestFormModal.style.display = "block";
 
-    // Check if password match
-    if (passwordSignup !== passwordconfSignup) {
-        // Call modal
-        passwordCheckModal.classList.add("show");
-        passwordCheckModal.style.display = "block";
+    // Change the text content
+    //modalMessage.textContent = "Wrong email or password!";
+    modalHeader.textContent = 'Job request!'
 
-        // Change the text content
-        modalHeader.textContent = "Ooops!"
-        modalMessage.textContent = "Passwords do not match!"
+    // signupFormContainer.style.display = "none";
+    // loginFormContainer.style.display = "";
+    //
+    // //  Clear password fields
+    // logInForm.loginEmail.value = ""
+    // logInForm.loginPassword.value = ""
 
-        signupFormContainer.style.display = "";
-        loginFormContainer.style.display = "none";
-
-        //  Clear password fields
-        signupForm.passwordSignup.value = ""
-        signupForm.passwordconfSignup.value = ""
-
-        // close modal
-        closeModal()
-        return
-    }else {
-
-        (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(auth, emailSignup, passwordSignup)
-            .then(cred => {
-                console.log('user created:', cred.user)
-                signupForm.reset()
-                // User signed in
-                window.location = "tasks.html";
-            })
-            .catch(err => {
-                console.log(err.message)
-
-                // Change the modal text
-                modalHeader.textContent = "Ooops!"
-                modalMessage.textContent = "Something went wrong! Try again!"
-                passwordCheckModal.classList.add("show");
-                passwordCheckModal.style.display = "block";
-                closeModal()
-            })
-    }
+    // close modal
+    closeModal()
 })
 
-//  end.    *******************************
+
+//  Generate user name from email   *******************
+function getUsernameFromEmail(email) {
+    const username = "Hello @" + email.split('@')[0];
+    return username;
+}
+//  end.    *******************************************
 
 
 function closeModal() {
-    // modal clos X button
+    // Modal buttons
     const closeModalXBtn = document.getElementById("closeModalXBtn")
-    const passwordCheckModal = document.getElementById('passwordCheckModal')
-// modal close button
-    const closeModal = document.getElementById("closeModalBtn")
+    const requestJoblBtn = document.getElementById("requestJoblBtn")
+    const cancelRequestBtn = document.getElementById('cancelRequestBtn')
+
     closeModalXBtn.addEventListener("click", function () {
-        passwordCheckModal.classList.add("hide");
-        passwordCheckModal.style.display = "none";
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
     });
 
-    closeModal.addEventListener("click", function () {
-        passwordCheckModal.classList.add("hide");
-        passwordCheckModal.style.display = "none";
+    cancelRequestBtn.addEventListener("click", function () {
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
+    });
+
+    requestJoblBtn.addEventListener("click", function () {
+        requestFormModal.classList.add("hide");
+        requestFormModal.style.display = "none";
     });
 }
-
-
-//  password check   not in use ***********************
-function passwordCheck() {
-    const email = signUpForm.email.value
-    const password = signUpForm.password.value
-    const passwconf = signUpForm.passwordconf.value
-    const modalMessage = document.getElementById('modalMessage')
-    const modalHeadre = document.getElementById('modalHeader')
-
-    let strength = 0;
-
-    if (password === passwconf) {
-        if (password.length < 6) {
-            // Call modal
-            passwordCheckModal()
-
-            // Change the text content
-            modalHeadre.textContent = "Ooops!"
-            modalMessage.textContent = "Password too short! At least 6 character required!"
-
-            //  Clear password fields
-            signUpForm.password.value = ""
-            signUpForm.passwordconf.value = ""
-
-            // close modal
-
-        }
-
-        // todo future feature - checking password strength
-        if (password.length > 7) strength += 1;
-        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1;
-        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1;
-        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
-        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
-
-        if (strength < 2) {
-
-            // Call modal
-
-            // Change the text content
-            modalHeadre.textContent = "Ooops!"
-            modalMessage.textContent = "Password too weak!"
-
-            //  Clear password fields
-            signUpForm.password.value = ""
-            signUpForm.passwordconf.value = ""
-
-            // Close modal
-
-        } else if (strength === 2) {
-
-            // Call modal
-            //passwordCheckModal()
-
-            // Change the text content
-            // modalHeadre.textContent = "Ooops!"
-            // modalMessage.textContent = "Medium strength password!"
-
-            //  Clear password fields
-            // signUpForm.password.value = ""
-            // signUpForm.passwordconf.value = ""
-
-            // Close modal
-            // modalClose()
-
-        } else {
-
-            // Call modal
-            // passwordCheckModal()
-
-            // Change the text content
-            // modalHeadre.textContent = "Ooops!"
-            // modalMessage.textContent = "Strong password!"
-
-            // Close modal
-            // modalClose()
-
-        }
-
-        // Create user and direct to tasks.html
-        (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(auth, email, password).then((cred) => {
-            signUpForm.reset()
-        }).then((userCredential) => {
-            // User signed in
-            window.location = "tasks.html";
-            // todo get it work
-            //const user = userCredential.user;
-
-        }).catch((err) => {
-            console.log(err.message + err.code)
-        })
-    } else {
-
-        // Call modal
-
-        // Change the text content
-        modalMessage.textContent = "Password does not match!";
-        modalHeadre.textContent = 'Oooops!'
-
-        //  Clear password fields
-        signUpForm.password.value = ""
-        signUpForm.passwordconf.value = ""
-
-        // close modal
-    }
-}
-//  end.            ***********************
-
 })();
 
 /******/ })()

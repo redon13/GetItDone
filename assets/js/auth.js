@@ -84,8 +84,8 @@ toLoginFormBtn.addEventListener('click', (e) => {
                 loginFormContainer.style.display = "";
 
                 //  Clear password fields
-                signupForm.passwordSignup.value = ""
-                signupForm.passwordconfSignup.value = ""
+                logInForm.loginEmail.value = ""
+                logInForm.loginPassword.value = ""
 
                 // close modal
                 closeModal()
@@ -275,7 +275,3 @@ function passwordCheck() {
     }
 }
 //  end.            ***********************
-
-
-// Initialize Cloud Firestore and get a reference to the service
-//const db = getFirestore(app)

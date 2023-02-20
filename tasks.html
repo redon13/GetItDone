@@ -116,16 +116,16 @@
       <div class="modal-body">
 
 <!--        Request form end. -->
-        <form>
+        <form class="requestForm">
           <div class="mb-3">
             <label for="jobDescription" class="col-form-label">Description:</label>
             <input type="text" class="form-control" id="jobDescription">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Note:</label>
-            <textarea class="form-control" id="message-text" style="resize: none;" maxlength="130"></textarea>
+            <label for="note" class="col-form-label">Note:</label>
+            <textarea class="form-control" id="note" style="resize: none;" maxlength="130"></textarea>
           </div>
-        </form>
+
 <!--  Request Form Modal end.  -->
 
 
@@ -213,11 +213,11 @@
         </div>
 
         <!--        Add photo end.  -->
-
+        </form>
 
 <!--      MModal footer -->
       <div class="modal-footer mt-3">
-        <button type="button" id="requestJoblBtn" class="btn btn-secondary" data-bs-dismiss="modal">Request</button>
+        <button type="button" id="newRequestBtn" class="btn btn-secondary" data-bs-dismiss="modal">Request</button>
         <button type="button" id="cancelRequestBtn" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
 <!--      Modal footer end. -->

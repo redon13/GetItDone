@@ -1,6 +1,12 @@
 // Firebase import    *******************
 import { initializeApp } from "firebase/app";
-//import { getFirestore } from "firebase/firestore";
+import {
+    getFirestore, collection, onSnapshot,
+    addDoc, deleteDoc, doc,
+    query, where,
+    orderBy, serverTimestamp,
+    updateDoc
+} from 'firebase/firestore'
 import {getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 // end. **************************
 
@@ -27,6 +33,7 @@ initializeApp(firebaseConfig);
 //  Init services   *****************************
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore()
 // const user = auth.currentUser;
 // end. *****************************************
 
@@ -89,13 +96,6 @@ requestJobBtn.addEventListener('click', (e) => {
     // Change the text content
     modalHeader.textContent = 'Job request!'
 
-    // signupFormContainer.style.display = "none";
-    // loginFormContainer.style.display = "";
-    //
-    // //  Clear password fields
-    // logInForm.loginEmail.value = ""
-    // logInForm.loginPassword.value = ""
-
     // Make floating button appear
     floatingBtn.style.display = "none"
 
@@ -111,11 +111,11 @@ function getUsernameFromEmail(email) {
 }
 //  end.    *******************************************
 
-
+// Close modal  ***************************************
 function closeModal() {
     // Modal buttons
     const closeModalXBtn = document.getElementById("closeModalXBtn")
-    const requestJoblBtn = document.getElementById("requestJoblBtn")
+    const newRequestBtn = document.getElementById("newRequestBtn")
     const cancelRequestBtn = document.getElementById('cancelRequestBtn')
 
     closeModalXBtn.addEventListener("click", function () {
@@ -134,7 +134,7 @@ function closeModal() {
         floatingBtn.style.display = "block"
     });
 
-    requestJoblBtn.addEventListener("click", function () {
+    newRequestBtn.addEventListener("click", function () {
         requestFormModal.classList.add("hide");
         requestFormModal.style.display = "none";
 
@@ -142,3 +142,61 @@ function closeModal() {
         floatingBtn.style.display = "block"
     });
 }
+//  end.    *******************************************
+
+
+//  Add new task   ***********************************
+
+
+// Check if a collection exists, create it if it doesn't
+const collectionRef = db.collection('tasks');
+collectionRef.get().then((querySnapshot) => {
+    if (querySnapshot.empty) {
+        collectionRef.doc('sampleDoc').set({ sampleField: 'sampleValue' });
+    }
+});
+
+const addNewTask = document.querySelector('.requestForm')
+const newRequestBtn = document.getElementById('newRequestBtn');
+
+// Add data to the collection from an HTML form
+const form = document.querySelector('form');
+newRequestBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const jobDescription = form.querySelector('.jobDescription').value;
+    const note = form.querySelector('.note').value;
+    const message = form.querySelector('#message').value;
+
+    collectionRef.add({
+        jobDescription: jobDescription,
+        note: note,
+        message: message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        console.log('Data added successfully!');
+        form.reset();
+    }).catch((error) => {
+        console.error('Error adding data: ', error);
+    });
+});
+
+// newRequestBtn.addEventListener('click', (e) => {
+//     e.preventDefault()
+//
+//     console.log('collection ref: ', colRef)
+//     addDoc(colRef, {
+//         jobDescription: addNewTask.jobDescription.value,
+//         note: addNewTask.note.value,
+//         //location: addNewTask.location.value,
+//         //date: addNewTask.date.value,
+//         //safety: addNewTask.safety.value,
+//         //taskNumber: addNewTask.taskNumber.value,
+//         requestedBy: 'user',
+//         createdAt: serverTimestamp()
+//     })
+//         .then(() => {
+//             console.log('New task added')
+//             addNewTask.reset()
+//         })
+// })

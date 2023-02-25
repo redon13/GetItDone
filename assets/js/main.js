@@ -61,7 +61,7 @@ const userCheck = onAuthStateChanged(auth, (user) => {
 
     } else {
         // No user is signed in, redirect to the login page
-        location.href = "index.html";
+        locationCheck.href = "index.html";
     }
 });
 
@@ -74,7 +74,7 @@ logoutButton.addEventListener('click', () => {
         .then(() => {
             console.log('user signed out')
             // No user is signed in, redirect to the login page
-            location.href = "index.html";
+            locationCheck.href = "index.html";
         })
         .catch(err => {
             console.log(err.message)
@@ -150,11 +150,11 @@ function closeModal() {
 const collectionRef = collection(db, 'tasks');
 const requestForm = document.getElementById('requestForm');
 const newRequestBtn = document.getElementById('newRequestBtn')
+let locationTask = ''
 newRequestBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const jobDescription = document.getElementById('jobDescription').value;
     const note = document.getElementById('note').value;
-    // const message = form.querySelector('#message').value;
 
     // Check for safety issues
     const issue = checkSafetyIssue('issue')
@@ -164,6 +164,7 @@ newRequestBtn.addEventListener('click', async (e) => {
             jobDescription: jobDescription,
             note: note,
             issue: issue,
+            location: locationTask,
             timestamp: serverTimestamp()
         });
         console.log('Data added successfully!');
@@ -172,6 +173,81 @@ newRequestBtn.addEventListener('click', async (e) => {
         console.error('Error adding data: ', error);
     }
 });
+//  end.    *******************************************
+
+
+
+
+// Change location button text **********************
+    const locationLdcBtn = document.getElementById('locationLdcBtn')
+    const locationLdcAdmissionBtn = document.getElementById('locationLdcAdmissionBtn')
+    const locationLdcRetailBtn = document.getElementById('locationLdcRetailBtn')
+    const locationLdcCafeBtn = document.getElementById('locationLdcCafeBtn')
+    const locationLdcHobBtn = document.getElementById('locationLdcHobBtn')
+    const locationLdcBackOfHouseBtn = document.getElementById('locationLdcBackOfHouseBtn')
+    const locationLdcCentreBtn = document.getElementById('locationLdcCentreBtn')
+
+    locationLdcAdmissionBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Admission';
+    }
+)
+    locationLdcRetailBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Retail';
+    }
+)
+    locationLdcCafeBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Cafe';
+    }
+)
+    locationLdcHobBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Hob';
+    }
+)
+    locationLdcBackOfHouseBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Back of House';
+    }
+)
+    locationLdcCentreBtn.addEventListener('click', () => {
+        locationLdcBtn.textContent = 'Centre';
+    }
+)
+
+    const locationSlBtn = document.getElementById('locationSlBtn')
+    const locationSlAdmissionBtn = document.getElementById('locationSlAdmissionBtn')
+    const locationSlRetailBtn = document.getElementById('locationSlRetailBtn')
+    const locationSlBackOfHouseBtn = document.getElementById('locationSlBackOfHouseBtn')
+    const locationSlCentreBtn = document.getElementById('locationSlCentreBtn')
+
+    locationSlAdmissionBtn.addEventListener('click', () => {
+        locationSlBtn.textContent = 'Admission';
+    }
+)
+    locationSlRetailBtn.addEventListener('click', () => {
+        locationSlBtn.textContent = 'Retail';
+    }
+)
+    locationSlBackOfHouseBtn.addEventListener('click', () => {
+        locationSlBtn.textContent = 'Back of House';
+    }
+)
+    locationSlCentreBtn.addEventListener('click', () => {
+        locationSlBtn.textContent = 'Centre';
+    }
+)
+
+// Get location of the task ****************************
+const locationCheck = document.getElementById('locationCentre');
+
+locationCheck.addEventListener('click', () => {
+    if (event.target.type === 'radio') {
+        const groupName = event.target.name;
+        const selectedValue = event.target.value;
+        locationTask = groupName + ': ' + selectedValue;
+
+        // todo delete
+        console.log(`Group: ${groupName}, selected value: ${selectedValue}`);
+    }
+})
 //  end.    *******************************************
 
 
@@ -194,7 +270,30 @@ function checkSafetyIssue(issue) {
 
 // Clear form after submit ****************************
 function clearRequestForm() {
+
     const jobDescription = document.getElementById('jobDescription').value = '';
     const note = document.getElementById('note').value = '';
+    const nosSafetyIssue = document.getElementById('noSafetyIssue').checked = true;
+
+    locationLdcBtn.textContent = 'Location LDC';
+    locationSlBtn.textContent = 'Location Sealife';
+
+    const clearLdcLocation = document.querySelector('input[type="radio"][name="Legoland"]')
+    const clearSlLocation = document.querySelector('input[type="radio"][name="Sealife"]')
+
+    // todo use foreach loop
+    locationLdcAdmissionBtn.checked = false;
+    locationLdcRetailBtn.checked = false;
+    locationLdcCafeBtn.checked = false;
+    locationLdcHobBtn.checked = false;
+    locationLdcBackOfHouseBtn.checked = false;
+    locationLdcCentreBtn.checked = false;
+
+    locationSlAdmissionBtn.checked = false;
+    locationSlRetailBtn.checked = false;
+    locationSlBackOfHouseBtn.checked = false;
+    locationSlCentreBtn.checked = false;
+
 }
+
 //  end.    *******************************************

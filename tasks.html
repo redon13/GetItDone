@@ -133,31 +133,55 @@
         <div class="container">
           <label for="locationCentre" class="col-form-label">Location:</label>
           <div class="row justify-content-center mb-3" id="locationCentre">
-            <div class="col-6">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Location LDC
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Admission</a></li>
-                <li><a class="dropdown-item" href="#">Retail</a></li>
-                <li><a class="dropdown-item" href="#">Cafe</a></li>
-                <li><a class="dropdown-item" href="#">HOB</a></li>
-                <li><a class="dropdown-item" href="#">Back of house</a></li>
-                <li><a class="dropdown-item" href="#">Centre</a></li>
-              </ul>
-            </div>
+                  <div class="col-6">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="locationLdcBtn">
+                          Location LDC
+                      </button>
+                      <ul class="dropdown-menu">
+                          <div class="btn-group btn-group-vertical btn-group-vertical-extra" role="group" aria-label="Basic radio toggle button group">
+                              <input type="radio" class="btn-check" name="Legoland" value="Admission" id="locationLdcAdmissionBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcAdmissionBtn">Admission</label>
 
-            <div class="col-6">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Location Sealife
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Admission</a></li>
-                <li><a class="dropdown-item" href="#">Retail</a></li>
-                <li><a class="dropdown-item" href="#">Back of house</a></li>
-                <li><a class="dropdown-item" href="#">Centre</a></li>
-              </ul>
-            </div>
+                              <input type="radio" class="btn-check" name="Legoland" value="Hob" id="locationLdcHobBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcHobBtn">Hob</label>
+
+                              <input type="radio" class="btn-check" name="Legoland" value="Retail" id="locationLdcRetailBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcRetailBtn">Retail</label>
+
+                              <input type="radio" class="btn-check" name="Legoland" value="Centre" id="locationLdcCentreBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcCentreBtn">Centre</label>
+
+                              <input type="radio" class="btn-check" name="Legoland" value="Cafe" id="locationLdcCafeBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcCafeBtn">Cafe</label>
+
+                              <input type="radio" class="btn-check" name="Legoland" value="Back of house" id="locationLdcBackOfHouseBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationLdcBackOfHouseBtn">Back of house</label>
+
+                          </div>
+                      </ul>
+                  </div>
+
+                  <div class="col-6">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="locationSlBtn">
+                          Location Sealife
+                      </button>
+                      <ul class="dropdown-menu">
+                          <div class="btn-group btn-group-vertical btn-group-vertical-extra" role="group" aria-label="Basic radio toggle button group">
+                              <input type="radio" class="btn-check" name="Sealife" value="Admission" id="locationSlAdmissionBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationSlAdmissionBtn">Admission</label>
+
+                              <input type="radio" class="btn-check" name="Sealife" value="Centre" id="locationSlCentreBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationSlCentreBtn">Centre</label>
+
+                              <input type="radio" class="btn-check" name="Sealife" value="Retail" id="locationSlRetailBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationSlRetailBtn">Retail</label>
+
+                              <input type="radio" class="btn-check" name="Sealife" value="Back of house" id="locationSlBackOfHouseBtn" autocomplete="off">
+                              <label class="btn btn-outline-secondary btn-outline-primary-extra" for="locationSlBackOfHouseBtn">Back of house</label>
+
+                          </div>
+                      </ul>
+                  </div>
           </div>
         </div>
         <!--  Centre location end.  -->
@@ -236,5 +260,6 @@
 <script src="dist/main.js"></script>
 <!--===============================================================================================-->
 
+</div>
 </body>
 </html>

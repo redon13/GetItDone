@@ -6,3 +6,15 @@ textarea.form-control {
     --bs-btn-padding-x: 4rem;
     --bs-btn-padding-y: .8rem
 }
+
+.btn-outline-secondary-extra{
+    width: 100%;
+}
+
+.btn-outline-primary-extra{
+    width: 100%;
+}
+
+.btn-group-vertical-extra{
+    width: 100%;
+}
